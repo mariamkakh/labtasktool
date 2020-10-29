@@ -1,0 +1,30 @@
+Info {
+	name: Lola
+	firstName: Wood
+	pathOrUrl: PathOrUrl {
+	basename: lolaPhotos
+	dateTime: 2020-10-29T22:40:38.607780700+03:00
+	pathToFile: C:\Users\Username\Desktop\lola.png
+}
+	dateOfRegistration: 2020-10-29T22:40:38.607780700+03:00
+}
+Info {
+	name: Garry
+	firstName: Moll
+	pathOrUrl: PathOrUrl {
+	basename: garryPhotos
+	dateTime: 2020-10-29T22:40:38.687144200+03:00
+	pathToFile: C:\Users\Username\Desktop\garry.png
+}
+	dateOfRegistration: 2020-10-29T22:40:38.687144200+03:00
+}
+Info {
+	name: Tom
+	firstName: Butty
+	pathOrUrl: PathOrUrl {
+	basename: tomPhotos
+	dateTime: 2020-10-29T22:40:38.688587700+03:00
+	pathToFile: C:\Users\Username\Desktop\tom.png
+}
+	dateOfRegistration: 2020-10-29T22:40:38.688587700+03:00
+}

@@ -1,5 +1,8 @@
 package com.java.automation.lab.fall.khamnava.core22.domain.classes;
 
+import com.java.automation.lab.fall.khamnava.core22.domain.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.domain.util.FileUtil;
+
 import java.time.OffsetDateTime;
 
 public class Comment {
@@ -51,5 +54,18 @@ public class Comment {
 
     public int hashCode(){
         return (getAbstractUser().hashCode() - getTime().hashCode()) * getComment().hashCode();
+    }
+
+    public static void logComments(Comment[] coms) throws EmptyListException {
+        StringBuffer sumLines = new StringBuffer();
+        if (coms.length == 0) {
+            throw new EmptyListException("Your array should be not zero length!");
+        }
+        for (int i = 0; i < coms.length; i++) {
+            sumLines.append(coms[i].getAbstractUser().getSignificantInfo().getName() + " " +
+                    coms[i].getAbstractUser().getSignificantInfo().getFirstName() + ": " + coms[i].getComment() + "\n");
+        }
+        FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
+                "\\fall\\khamnava\\core22\\domain\\resources\\Comment.dict", sumLines.toString());
     }
 }

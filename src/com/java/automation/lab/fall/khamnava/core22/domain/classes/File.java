@@ -17,7 +17,7 @@ public class File extends AbstractAttachment {
 
     @Override
     public String toString() {
-        return "Sprint {\n\tbasename: " + getBasename() +
+        return "PathOrUrl {\n\tbasename: " + getBasename() +
                 "\n\tdateTime: " + getDateTimeAttach().toString() +
                 "\n\tpathToFile: " + pathToFile.toString() +
                 "\n}";

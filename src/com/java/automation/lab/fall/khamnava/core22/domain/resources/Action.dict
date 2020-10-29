@@ -1,0 +1,61 @@
+Action {
+	abstractUser: Sprint {
+	significantInfo: Info {
+	name: Lola
+	firstName: Wood
+	pathOrUrl: PathOrUrl {
+	basename: lolaPhotos
+	dateTime: 2020-10-29T22:40:38.607780700+03:00
+	pathToFile: C:\Users\Username\Desktop\lola.png
+}
+	dateOfRegistration: 2020-10-29T22:40:38.607780700+03:00
+}
+
+	role: ADMIN
+	visualBoard: [Lcom.java.automation.lab.fall.khamnava.core22.domain.classes.VisualBoard;@5cb9f472
+	action: [ADD_TASK, ADD_COMMENT, ADD_ATTACHMENT, MOVE_TASK, ADD_TASK_TO_TRASH, EDIT_TASK, CREATE_SPRINT, CLOSE_SCRIPT, WATCH_SPRINT, WATCH_TASK, ASSIGN_TASK]
+}
+	timeOfExecution: 2020-10-29T22:40:38.764361600+03:00
+	taskOfExecution: Make a program
+	actionOfUser: ASSIGN_TASK
+}Action {
+	abstractUser: Sprint {
+	significantInfo: Info {
+	name: Garry
+	firstName: Moll
+	pathOrUrl: PathOrUrl {
+	basename: garryPhotos
+	dateTime: 2020-10-29T22:40:38.687144200+03:00
+	pathToFile: C:\Users\Username\Desktop\garry.png
+}
+	dateOfRegistration: 2020-10-29T22:40:38.687144200+03:00
+}
+
+	role: USER
+	visualBoard: [Lcom.java.automation.lab.fall.khamnava.core22.domain.classes.VisualBoard;@cb644e
+	action: [ADD_TASK, ADD_COMMENT, ADD_ATTACHMENT, MOVE_TASK, ADD_TASK_TO_TRASH, EDIT_TASK, WATCH_SPRINT, WATCH_TASK, ASSIGN_TASK]
+}
+	timeOfExecution: 2020-10-29T22:40:38.764361600+03:00
+	taskOfExecution: Add a new project task
+	actionOfUser: ADD_TASK
+}Action {
+	abstractUser: Sprint {
+	significantInfo: Info {
+	name: Tom
+	firstName: Butty
+	pathOrUrl: PathOrUrl {
+	basename: tomPhotos
+	dateTime: 2020-10-29T22:40:38.688587700+03:00
+	pathToFile: C:\Users\Username\Desktop\tom.png
+}
+	dateOfRegistration: 2020-10-29T22:40:38.688587700+03:00
+}
+
+	role: GUEST
+	visualBoard: [Lcom.java.automation.lab.fall.khamnava.core22.domain.classes.VisualBoard;@13805618
+	action: [WATCH_TASK, WATCH_SPRINT]
+}
+	timeOfExecution: 2020-10-29T22:40:38.764361600+03:00
+	taskOfExecution: Watch your task
+	actionOfUser: WATCH_TASK
+}

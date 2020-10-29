@@ -17,7 +17,7 @@ public class UrlAdress extends AbstractAttachment {
 
     @Override
     public String toString() {
-        return "Sprint {\n\tbasename: " + getBasename() +
+        return "PathOrUrl {\n\tbasename: " + getBasename() +
                 "\n\tdateTime: " + getDateTimeAttach().toString() +
                 "\n\turlAdress: " + urlAdress.toString() +
                 "\n}";

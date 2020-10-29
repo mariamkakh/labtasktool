@@ -1,6 +1,8 @@
 package com.java.automation.lab.fall.khamnava.core22.domain.classes;
 
 import com.java.automation.lab.fall.khamnava.core22.domain.enums.UserAction;
+import com.java.automation.lab.fall.khamnava.core22.domain.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.domain.util.FileUtil;
 
 import java.time.OffsetDateTime;
 
@@ -41,9 +43,9 @@ public class Action {
 
     @Override
     public String toString() {
-        return "Sprint {\n\tabstractUser: " + abstractUser.toString() +
+        return "Action {\n\tabstractUser: " + abstractUser.toString() +
                 "\n\ttimeOfExecution: " + timeOfExecution.toString() +
-                "\n\ttaskOfExecution: " + taskOfExecution.toString() +
+                "\n\ttaskOfExecution: " + taskOfExecution.getNameTask() +
                 "\n\tactionOfUser: " + actionOfUser.toString() +
                 "\n}";
     }
@@ -68,6 +70,18 @@ public class Action {
     public int hashCode(){
         return (getAbstractUser().hashCode() + getTimeOfExecution().hashCode()) *
                 (getTaskOfExecution().hashCode() + getActionOfUser().hashCode());
+    }
+
+    public static void logAction(Action[] acts) throws EmptyListException {
+        StringBuffer sumAct = new StringBuffer();
+        if (acts.length == 0) {
+            throw new EmptyListException("Your array should be not zero length!");
+        }
+        for (int i = 0; i < acts.length; i++) {
+            sumAct.append(acts[i].toString());
+        }
+        FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
+                    "\\fall\\khamnava\\core22\\domain\\resources\\Action.dict", sumAct.toString());
     }
 }
 

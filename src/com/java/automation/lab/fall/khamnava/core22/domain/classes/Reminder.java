@@ -1,5 +1,8 @@
 package com.java.automation.lab.fall.khamnava.core22.domain.classes;
 
+import com.java.automation.lab.fall.khamnava.core22.domain.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.domain.util.FileUtil;
+
 import java.time.OffsetDateTime;
 
 public class Reminder {
@@ -51,5 +54,19 @@ public class Reminder {
 
     public int hashCode(){
         return (getAbstractUser().hashCode() - getTask().hashCode()) + getDateForReminder().hashCode();
+    }
+
+    public static void logRemind(Reminder[] rem) throws EmptyListException {
+        StringBuffer sumRems = new StringBuffer();
+        if (rem.length == 0) {
+            throw new EmptyListException("Your array should be not zero length!");
+        }
+        for (int i = 0; i < rem.length; i++) {
+            sumRems.append(rem[i].getAbstractUser().getSignificantInfo().getName() + " " +
+                    rem[i].getAbstractUser().getSignificantInfo().getFirstName() + ": " + rem[i].getTask().getNameTask()
+                    + " (" + rem[i].getDateForReminder() + ")!!!" + "\n");
+        }
+        FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
+                "\\fall\\khamnava\\core22\\domain\\resources\\Reminder.dict", sumRems.toString());
     }
 }

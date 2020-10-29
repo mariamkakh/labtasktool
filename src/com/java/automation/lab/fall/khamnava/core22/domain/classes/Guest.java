@@ -3,6 +3,7 @@ package com.java.automation.lab.fall.khamnava.core22.domain.classes;
 import com.java.automation.lab.fall.khamnava.core22.domain.enums.StatusOfTask;
 import com.java.automation.lab.fall.khamnava.core22.domain.enums.UserAction;
 import com.java.automation.lab.fall.khamnava.core22.domain.enums.UserRole;
+import com.java.automation.lab.fall.khamnava.core22.domain.exception.ForbiddenActionException;
 
 import java.util.Arrays;
 
@@ -14,8 +15,8 @@ public class Guest extends AbstractUser{
     }
 
     @Override
-    public void assigneeTask(User user, Task task) {
-        throw new RuntimeException("Not implemented");
+    public void assigneeTask(User user, Task task) throws ForbiddenActionException {
+        throw new ForbiddenActionException();
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.java.automation.lab.fall.khamnava.core22.domain.classes;
 
+import com.java.automation.lab.fall.khamnava.core22.domain.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.domain.util.FileUtil;
+
 import java.time.OffsetDateTime;
 
 public class Info {
@@ -33,11 +36,11 @@ public class Info {
 
     @Override
     public String toString() {
-        return "Sprint {\n\tname: " + name +
+        return "Info {\n\tname: " + name +
                 "\n\tfirstName: " + firstName +
                 "\n\tpathOrUrl: " + pathOrUrl.toString() +
                 "\n\tdateOfRegistration: " + dateOfRegistration.toString() +
-                "\n}";
+                "\n}\n";
     }
 
     @Override
@@ -60,5 +63,17 @@ public class Info {
     public int hashCode(){
         return (name.hashCode() + firstName.hashCode()) *
                 (getPathOrUrl().hashCode() + getDateOfRegistration().hashCode());
+    }
+
+    public static void logInfo(Info[] infos) throws EmptyListException{
+        StringBuffer sumInfo = new StringBuffer();
+        if (infos.length == 0) {
+            throw new EmptyListException("Your array should be not zero length!");
+        }
+        for (int i = 0; i < infos.length; i++) {
+            sumInfo.append(infos[i].toString());
+        }
+        FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
+                "\\fall\\khamnava\\core22\\domain\\resources\\Info.dict", sumInfo.toString());
     }
 }
