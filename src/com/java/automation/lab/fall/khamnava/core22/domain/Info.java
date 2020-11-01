@@ -69,7 +69,7 @@ public class Info {
 
     public static void logInfo(List<Info> infos) throws EmptyListException, InvalidPathException {
         StringBuffer sumInfo = new StringBuffer();
-        if (infos.size() == 0) {
+        if (infos.isEmpty()) {
             throw new EmptyListException("Your array should be not zero length!");
         }
         for (int i = 0; i < infos.size(); i++) {

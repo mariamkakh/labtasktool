@@ -60,7 +60,7 @@ public class Comment {
 
     public static void logComments(List<Comment> coms) throws EmptyListException, InvalidPathException {
         StringBuffer sumLines = new StringBuffer();
-        if (coms.size() == 0) {
+        if (coms.isEmpty()) {
             throw new EmptyListException("Your array should be not zero length!");
         }
         for (int i = 0; i < coms.size(); i++) {

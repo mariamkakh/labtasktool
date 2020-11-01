@@ -76,7 +76,7 @@ public class Action {
 
     public static void logAction(List<Action> acts) throws EmptyListException, InvalidPathException {
         StringBuffer sumAct = new StringBuffer();
-        if (acts.size() == 0) {
+        if (acts.isEmpty()) {
             throw new EmptyListException("Your array should be not zero length!");
         }
         for (int i = 0; i < acts.size(); i++) {

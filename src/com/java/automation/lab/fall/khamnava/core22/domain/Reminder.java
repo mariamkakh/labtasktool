@@ -60,7 +60,7 @@ public class Reminder {
 
     public static void logRemind(List<Reminder> rem) throws EmptyListException, InvalidPathException {
         StringBuffer sumRems = new StringBuffer();
-        if (rem.size() == 0) {
+        if (rem.isEmpty()) {
             throw new EmptyListException("Your array should be not zero length!");
         }
         for (int i = 0; i < rem.size(); i++) {
