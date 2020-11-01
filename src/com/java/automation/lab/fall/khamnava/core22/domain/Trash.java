@@ -1,12 +1,13 @@
 package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Trash {
     private VisualBoard board;
-    private Task[] deletedTasks;
+    private LinkedList<Task> deletedTasks;
 
-    public Trash(VisualBoard board, Task[] addedTasks) {
+    public Trash(VisualBoard board, LinkedList<Task> addedTasks) {
         this.board = board;
         this.deletedTasks = addedTasks;
     }
@@ -15,14 +16,19 @@ public class Trash {
 
     public void setBoard(VisualBoard board) { this.board = board; }
 
-    public Task[] getDeletedTasks() { return this.deletedTasks; }
+    public LinkedList<Task> getDeletedTasks() { return this.deletedTasks; }
 
-    public void setDeletedTasks(Task[] deletedTasks) { this.deletedTasks = deletedTasks; }
+    public void setDeletedTasks(LinkedList<Task> deletedTasks) { this.deletedTasks = deletedTasks; }
 
     @Override
     public String toString() {
-        return "Sprint {\n\tboard: " + board.toString() +
-                "\n\taddedTasks: " + Arrays.toString(deletedTasks) +
+        String res = "[ ";
+        for(Task t : deletedTasks) {
+            res += (t.toString() + ",\n");
+        }
+        res += "]";
+        return "Trash {\n\tboard: " + board.toString() +
+                "\n\taddedTasks: " + res +
                 "\n}";
     }
 
@@ -38,10 +44,10 @@ public class Trash {
             return true;
         }
         return getBoard().equals(((Trash) that).getBoard()) &&
-                Arrays.equals(getDeletedTasks(), ((Trash) that).getDeletedTasks());
+                getDeletedTasks().equals(((Trash) that).getDeletedTasks());
     }
 
     public int hashCode(){
-        return getBoard().hashCode() + Arrays.hashCode(deletedTasks);
+        return getBoard().hashCode() + getDeletedTasks().hashCode();
     }
 }

@@ -2,9 +2,11 @@ package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import com.java.automation.lab.fall.khamnava.core22.enums.UserAction;
 import com.java.automation.lab.fall.khamnava.core22.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.exception.InvalidPathException;
 import com.java.automation.lab.fall.khamnava.core22.util.FileUtil;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class Action {
     private AbstractUser abstractUser;
@@ -72,13 +74,13 @@ public class Action {
                 (getTaskOfExecution().hashCode() + getActionOfUser().hashCode());
     }
 
-    public static void logAction(Action[] acts) throws EmptyListException {
+    public static void logAction(List<Action> acts) throws EmptyListException, InvalidPathException {
         StringBuffer sumAct = new StringBuffer();
-        if (acts.length == 0) {
+        if (acts.size() == 0) {
             throw new EmptyListException("Your array should be not zero length!");
         }
-        for (int i = 0; i < acts.length; i++) {
-            sumAct.append(acts[i].toString());
+        for (int i = 0; i < acts.size(); i++) {
+            sumAct.append(acts.get(i).toString());
         }
         FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
                     "\\fall\\khamnava\\core22\\domain\\resources\\Action.dict", sumAct.toString());

@@ -1,9 +1,11 @@
 package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import com.java.automation.lab.fall.khamnava.core22.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.exception.InvalidPathException;
 import com.java.automation.lab.fall.khamnava.core22.util.FileUtil;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class Info {
     private String name;
@@ -65,13 +67,13 @@ public class Info {
                 (getPathOrUrl().hashCode() + getDateOfRegistration().hashCode());
     }
 
-    public static void logInfo(Info[] infos) throws EmptyListException{
+    public static void logInfo(List<Info> infos) throws EmptyListException, InvalidPathException {
         StringBuffer sumInfo = new StringBuffer();
-        if (infos.length == 0) {
+        if (infos.size() == 0) {
             throw new EmptyListException("Your array should be not zero length!");
         }
-        for (int i = 0; i < infos.length; i++) {
-            sumInfo.append(infos[i].toString());
+        for (int i = 0; i < infos.size(); i++) {
+            sumInfo.append(infos.get(i).toString());
         }
         FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
                 "\\fall\\khamnava\\core22\\domain\\resources\\Info.dict", sumInfo.toString());

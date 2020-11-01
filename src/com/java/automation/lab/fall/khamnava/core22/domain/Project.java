@@ -1,28 +1,40 @@
 package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Project {
-    private AbstractUser[] membersOfProject;
-    private VisualBoard[] boards;
+    private List<AbstractUser> membersOfProject;
+    private List<VisualBoard> boards;
 
-    public Project(AbstractUser[] membersOfProject, VisualBoard[] boards) {
+    public Project(List<AbstractUser> membersOfProject, List<VisualBoard> boards) {
         this.membersOfProject = membersOfProject;
         this.boards = boards;
     }
 
-    public AbstractUser[] getMembersOfProject() { return this.membersOfProject; }
+    public List<AbstractUser> getMembersOfProject() { return this.membersOfProject; }
 
-    public void setMembersOfProject(AbstractUser[] membersOfProject) { this.membersOfProject = membersOfProject; }
+    public void setMembersOfProject(List<AbstractUser> membersOfProject) { this.membersOfProject = membersOfProject; }
 
-    public VisualBoard[] getBoards() { return this.boards; }
+    public List<VisualBoard> getBoards() { return this.boards; }
 
-    public void setBoards(VisualBoard[] boards) { this.boards = boards; }
+    public void setBoards(List<VisualBoard> boards) { this.boards = boards; }
 
     @Override
     public String toString() {
-        return "Sprint {\n\tmembersOfProject: " + Arrays.toString(membersOfProject) +
-                "\n\tboards: " + Arrays.toString(boards) +
+        String res1 = "[ ";
+        for(AbstractUser abU : membersOfProject) {
+            res1 += (abU.toString() + ",\n");
+        }
+        res1 += "]";
+
+        String res2 = "[ ";
+        for(VisualBoard visB : boards) {
+            res2 += (visB.toString() + ",\n");
+        }
+        res2 += "]";
+        return "Project {\n\tmembersOfProject: " + res1 +
+                "\n\tboards: " + res2 +
                 "\n}";
     }
 
@@ -37,11 +49,11 @@ public class Project {
         if (this == that) {
             return true;
         }
-        return  Arrays.equals(getMembersOfProject(), ((Project) that).getMembersOfProject()) &&
-                Arrays.equals(getBoards(), ((Project) that).getBoards());
+        return  getMembersOfProject().equals(((Project) that).getMembersOfProject()) &&
+                getBoards().equals(((Project) that).getBoards());
     }
 
     public int hashCode(){
-        return Arrays.hashCode(getMembersOfProject()) + Arrays.hashCode(getBoards());
+        return getMembersOfProject().hashCode() + getBoards().hashCode();
     }
 }

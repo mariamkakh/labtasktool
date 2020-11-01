@@ -1,9 +1,11 @@
 package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import com.java.automation.lab.fall.khamnava.core22.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.exception.InvalidPathException;
 import com.java.automation.lab.fall.khamnava.core22.util.FileUtil;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class Comment {
     private AbstractUser abstractUser;
@@ -56,14 +58,15 @@ public class Comment {
         return (getAbstractUser().hashCode() - getTime().hashCode()) * getComment().hashCode();
     }
 
-    public static void logComments(Comment[] coms) throws EmptyListException {
+    public static void logComments(List<Comment> coms) throws EmptyListException, InvalidPathException {
         StringBuffer sumLines = new StringBuffer();
-        if (coms.length == 0) {
+        if (coms.size() == 0) {
             throw new EmptyListException("Your array should be not zero length!");
         }
-        for (int i = 0; i < coms.length; i++) {
-            sumLines.append(coms[i].getAbstractUser().getSignificantInfo().getName() + " " +
-                    coms[i].getAbstractUser().getSignificantInfo().getFirstName() + ": " + coms[i].getComment() + "\n");
+        for (int i = 0; i < coms.size(); i++) {
+            sumLines.append(coms.get(i).getAbstractUser().getSignificantInfo().getName() + " " +
+                    coms.get(i).getAbstractUser().getSignificantInfo().getFirstName() + ": " + coms.get(i).getComment()
+                    + "\n");
         }
         FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
                 "\\fall\\khamnava\\core22\\domain\\resources\\Comment.dict", sumLines.toString());

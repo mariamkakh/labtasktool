@@ -2,17 +2,19 @@ package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Sprint {
     private OffsetDateTime beginOfSprint;
     private OffsetDateTime endOfSprint;
-    private AbstractUser[] membersOfSprint;
+    private List<AbstractUser> membersOfSprint;
     private VisualBoard visualization;
-    private Task[] tasksOfScript;
+    private LinkedList<Task> tasksOfScript;
     private int maxStoryPoints;
 
-    public Sprint(OffsetDateTime beginOfSprint, OffsetDateTime endOfSprint, AbstractUser[] membersOfSprint,
-                  VisualBoard visualization, Task[] tasksOfScript, int maxStoryPoints) {
+    public Sprint(OffsetDateTime beginOfSprint, OffsetDateTime endOfSprint, List<AbstractUser> membersOfSprint,
+                  VisualBoard visualization, LinkedList<Task> tasksOfScript, int maxStoryPoints) {
         this.beginOfSprint = beginOfSprint;
         this.endOfSprint = endOfSprint;
         this.membersOfSprint = membersOfSprint;
@@ -29,17 +31,17 @@ public class Sprint {
 
     public void setEndOfSprint(OffsetDateTime endOfSprint) { this.endOfSprint = endOfSprint; }
 
-    public AbstractUser[] getMembersOfSprint() { return this.membersOfSprint; }
+    public List<AbstractUser> getMembersOfSprint() { return this.membersOfSprint; }
 
-    public void setMembersOfSprint(AbstractUser[] membersOfSprint) { this.membersOfSprint = membersOfSprint; }
+    public void setMembersOfSprint(List<AbstractUser> membersOfSprint) { this.membersOfSprint = membersOfSprint; }
 
     public VisualBoard getVisualization() { return this.visualization; }
 
     public void setVisualization(VisualBoard visualization) { this.visualization = visualization; }
 
-    public Task[] getTasksOfScript() { return this.tasksOfScript; }
+    public LinkedList<Task> getTasksOfScript() { return this.tasksOfScript; }
 
-    public void setTasksOfScript(Task[] tasksOfScript) { this.tasksOfScript = tasksOfScript; }
+    public void setTasksOfScript(LinkedList<Task> tasksOfScript) { this.tasksOfScript = tasksOfScript; }
 
     public int getMaxStoryPoints() { return this.maxStoryPoints; }
 
@@ -68,14 +70,14 @@ public class Sprint {
         }
         return getBeginOfSprint().equals(((Sprint) that).getBeginOfSprint()) &&
                 getEndOfSprint().equals(((Sprint) that).getEndOfSprint()) &&
-                Arrays.equals(getMembersOfSprint(), ((Sprint) that).getMembersOfSprint()) &&
+                getMembersOfSprint().equals(((Sprint) that).getMembersOfSprint()) &&
                 getVisualization().equals(((Sprint) that).getVisualization()) &&
-                Arrays.equals(getTasksOfScript(), ((Sprint) that).getTasksOfScript()) &&
+                getTasksOfScript().equals(((Sprint) that).getTasksOfScript()) &&
                 maxStoryPoints == ((Sprint) that).maxStoryPoints;
     }
 
     public int hashCode(){
-        return (getBeginOfSprint().hashCode() - getEndOfSprint().hashCode() + Arrays.hashCode(getMembersOfSprint())) *
-                (getVisualization().hashCode() + Arrays.hashCode(getTasksOfScript())) * maxStoryPoints;
+        return (getBeginOfSprint().hashCode() - getEndOfSprint().hashCode() + getMembersOfSprint().hashCode()) *
+                (getVisualization().hashCode() + getTasksOfScript().hashCode() * maxStoryPoints);
     }
 }

@@ -6,13 +6,17 @@ import com.java.automation.lab.fall.khamnava.core22.enums.UserRole;
 import com.java.automation.lab.fall.khamnava.core22.factory.TaskFactory;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 public class Admin extends AbstractUser {
-    private UserAction[] action = {UserAction.ADD_TASK, UserAction.ADD_COMMENT, UserAction.ADD_ATTACHMENT,
-            UserAction.MOVE_TASK, UserAction.ADD_TASK_TO_TRASH, UserAction.EDIT_TASK, UserAction.CREATE_SPRINT,
-            UserAction.CLOSE_SCRIPT, UserAction.WATCH_SPRINT, UserAction.WATCH_TASK, UserAction.ASSIGN_TASK};
+    private HashSet<UserAction> action = new HashSet<UserAction>(Arrays.asList(UserAction.ADD_TASK,
+            UserAction.ADD_COMMENT, UserAction.ADD_ATTACHMENT, UserAction.MOVE_TASK, UserAction.ADD_TASK_TO_TRASH,
+            UserAction.EDIT_TASK, UserAction.CREATE_SPRINT, UserAction.CLOSE_SCRIPT, UserAction.WATCH_SPRINT,
+            UserAction.WATCH_TASK, UserAction.ASSIGN_TASK));
 
-    public Admin(Info significantInfo, UserRole role, VisualBoard[] visualBoard) {
+    public Admin(Info significantInfo, UserRole role, List<VisualBoard> visualBoard) {
         super(significantInfo, role, visualBoard);
     }
 
@@ -34,31 +38,32 @@ public class Admin extends AbstractUser {
 
     @Override
     public void addComment(Task task, Comment comment) {
-        Comment[] oldArr = task.getComments();
-        Comment[] newArr = new Comment[oldArr.length + 1];
-        for (int i = 0; i < oldArr.length; i++) {
-            newArr[i] = oldArr[i];
-        }
-        newArr[oldArr.length] = comment;
-        task.setComments(newArr);
+        task.addComment(comment);
     }
 
     @Override
     public void writeInfo() {
         System.out.print(this.getSignificantInfo().getName() + " " + this.getSignificantInfo().getFirstName() +
                 " " + this.getRole() + " ");
-        for (int i = 0; i < action.length; i++) {
-            System.out.print(this.action[i] + " ");
+        Iterator<UserAction> i = action.iterator();
+        while (i.hasNext()) {
+            System.out.print(i.next().toString() + " ");
         }
         System.out.println();
     }
 
     @Override
     public String toString() {
-        return "Sprint {\n\tsignificantInfo: " + getSignificantInfo().toString() +
+        String res = "[ ";
+        Iterator<UserAction> i = action.iterator();
+        while (i.hasNext()) {
+            res += (i.next().toString() + " ");
+        }
+        res += "]";
+        return "Admin {\n\tsignificantInfo: " + getSignificantInfo().toString() +
                 "\n\trole: " + getRole().toString() +
                 "\n\tvisualBoard: " + getVisualBoard().toString() +
-                "\n\taction: " + Arrays.toString(action) +
+                "\n\taction: " + res +
                 "\n}";
     }
 
@@ -76,12 +81,12 @@ public class Admin extends AbstractUser {
         return getSignificantInfo().equals(((Admin) that).getSignificantInfo()) &&
                 getRole().equals(((Admin) that).getRole()) &&
                 getVisualBoard().equals(((Admin) that).getVisualBoard()) &&
-                Arrays.equals(action, ((Admin) that).action);
+                this.action.equals(((Admin) that).action);
     }
 
     public int hashCode(){
         return getSignificantInfo().hashCode() * getRole().hashCode() -
-                getVisualBoard().hashCode() * Arrays.hashCode(action);
+                getVisualBoard().hashCode() * this.action.hashCode();
     }
 }
 

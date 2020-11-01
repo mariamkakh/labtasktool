@@ -11,6 +11,8 @@ import com.java.automation.lab.fall.khamnava.core22.util.FileUtil;
 
 import java.nio.file.Paths;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,7 +25,7 @@ public class Main {
                         Paths.get("C:\\Users\\Username\\Desktop\\lola.png")),
                 OffsetDateTime.now());
         UserRole testRole1 = UserRole.ADMIN;
-        VisualBoard[] visualBoards1 = new VisualBoard[0];
+        List<VisualBoard> visualBoards1 = new ArrayList<>();
         Admin user1 = new Admin(testInfo1, testRole1, visualBoards1);
         user1.writeInfo();
 
@@ -36,7 +38,7 @@ public class Main {
                         Paths.get("C:\\Users\\Username\\Desktop\\garry.png")),
                 OffsetDateTime.now());
         UserRole testRole2 = UserRole.USER;
-        VisualBoard[] visualBoards2 = new VisualBoard[0];
+        List<VisualBoard> visualBoards2 = new ArrayList<>();
         User user2 = new User(testInfo2, testRole2, visualBoards2);
         user2.writeInfo();
 
@@ -49,7 +51,7 @@ public class Main {
                         Paths.get("C:\\Users\\Username\\Desktop\\tom.png")),
                 OffsetDateTime.now());
         UserRole testRole3 = UserRole.GUEST;
-        VisualBoard[] visualBoards3 = new VisualBoard[0];
+        List<VisualBoard> visualBoards3 = new ArrayList<>();
         Guest user3 = new Guest(testInfo3, testRole3, visualBoards3);
         user3.writeInfo();
 
@@ -61,7 +63,10 @@ public class Main {
         Comment com1 = new Comment(user1, OffsetDateTime.now(), "Change type of your task");
         Comment com2 = new Comment(user2, OffsetDateTime.now(), "Find new solution of this problem task");
         try {
-            Comment.logComments(new Comment[]{com1, com2});
+            List<Comment> coms = new ArrayList<>();
+            coms.add(com1);
+            coms.add(com2);
+            Comment.logComments(coms);
             System.out.println(FileUtil.read(Constants.pathComments));
         } catch(EmptyListException ex){
             System.out.println("Comment list is empty!!");
@@ -70,8 +75,12 @@ public class Main {
         }
 
         try {
-            Info.logInfo(new Info[] {testInfo1, testInfo2, testInfo3});
-        } catch(EmptyListException ex){
+            List<Info> info = new ArrayList<>();
+            info.add(testInfo1);
+            info.add(testInfo2);
+            info.add(testInfo3);
+            Info.logInfo(info);
+        } catch(EmptyListException | InvalidPathException ex){
             System.out.println("Info list is empty!!");
         }
 
@@ -85,7 +94,11 @@ public class Main {
         Action act3 = new Action(user3, OffsetDateTime.now(), task3, UserAction.WATCH_TASK);
 
         try {
-            Action.logAction(new Action[]{act1, act2, act3});
+            List<Action> acts = new ArrayList<>();
+            acts.add(act1);
+            acts.add(act2);
+            acts.add(act3);
+            Action.logAction(acts);
             System.out.println(FileUtil.read(Constants.pathAction));
         } catch(EmptyListException ex){
             System.out.println("Action list is empty!!");
@@ -98,8 +111,12 @@ public class Main {
         Reminder rem3 = new Reminder(user3, task3, OffsetDateTime.now());
 
         try {
-        Reminder.logRemind(new Reminder[] {rem1, rem2, rem3});
-        System.out.println(FileUtil.read(Constants.pathReminder));
+            List<Reminder> rems = new ArrayList<>();
+            rems.add(rem1);
+            rems.add(rem2);
+            rems.add(rem3);
+            Reminder.logRemind(rems);
+            System.out.println(FileUtil.read(Constants.pathReminder));
         } catch(EmptyListException ex){
             System.out.println("Reminder list is empty!!");
         } catch(InvalidPathException ex){

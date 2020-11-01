@@ -1,9 +1,11 @@
 package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import com.java.automation.lab.fall.khamnava.core22.exception.EmptyListException;
+import com.java.automation.lab.fall.khamnava.core22.exception.InvalidPathException;
 import com.java.automation.lab.fall.khamnava.core22.util.FileUtil;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class Reminder {
     private AbstractUser abstractUser;
@@ -56,15 +58,15 @@ public class Reminder {
         return (getAbstractUser().hashCode() - getTask().hashCode()) + getDateForReminder().hashCode();
     }
 
-    public static void logRemind(Reminder[] rem) throws EmptyListException {
+    public static void logRemind(List<Reminder> rem) throws EmptyListException, InvalidPathException {
         StringBuffer sumRems = new StringBuffer();
-        if (rem.length == 0) {
+        if (rem.size() == 0) {
             throw new EmptyListException("Your array should be not zero length!");
         }
-        for (int i = 0; i < rem.length; i++) {
-            sumRems.append(rem[i].getAbstractUser().getSignificantInfo().getName() + " " +
-                    rem[i].getAbstractUser().getSignificantInfo().getFirstName() + ": " + rem[i].getTask().getNameTask()
-                    + " (" + rem[i].getDateForReminder() + ")!!!" + "\n");
+        for (int i = 0; i < rem.size(); i++) {
+            sumRems.append(rem.get(i).getAbstractUser().getSignificantInfo().getName() + " " +
+                    rem.get(i).getAbstractUser().getSignificantInfo().getFirstName() + ": " +
+                    rem.get(i).getTask().getNameTask() + " (" + rem.get(i).getDateForReminder() + ")!!!" + "\n");
         }
         FileUtil.write("E:\\java\\core2\\tool\\src\\com\\java\\automation\\lab" +
                 "\\fall\\khamnava\\core22\\domain\\resources\\Reminder.dict", sumRems.toString());

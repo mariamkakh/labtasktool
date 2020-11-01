@@ -3,23 +3,24 @@ package com.java.automation.lab.fall.khamnava.core22.domain;
 import com.java.automation.lab.fall.khamnava.core22.enums.Color;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class ListOfTasks {
-    private Task[] tasks;
+    private LinkedList<Task> tasks;
     private AbstractUser taskCreator;
     private Color color;
     private String nameOfList;
 
-    public ListOfTasks(Task[] tasks, AbstractUser taskCreator, Color color, String nameOfList) {
+    public ListOfTasks(LinkedList<Task> tasks, AbstractUser taskCreator, Color color, String nameOfList) {
         this.tasks = tasks;
         this.taskCreator = taskCreator;
         this.color = color;
         this.nameOfList = nameOfList;
     }
 
-    public Task[] getTasks() { return this.tasks; }
+    public LinkedList<Task> getTasks() { return this.tasks; }
 
-    public void setTasks(Task[] tasks) { this.tasks = tasks; }
+    public void setTasks(LinkedList<Task> tasks) { this.tasks = tasks; }
 
     public AbstractUser getTaskCreator() { return this.taskCreator; }
 
@@ -35,7 +36,7 @@ public class ListOfTasks {
 
     @Override
     public String toString() {
-        return "Sprint {\n\ttasks: " + tasks.toString() +
+        return "ListOfTasks {\n\ttasks: " + tasks.toString() +
                 "\n\t:taskCreator " + taskCreator.toString() +
                 "\n\tcolor: " + color +
                 "\n\tnameOfList " + nameOfList +
@@ -53,14 +54,14 @@ public class ListOfTasks {
         if (this == that) {
             return true;
         }
-        return  Arrays.equals(getTasks(), ((ListOfTasks) that).getTasks()) &&
+        return  getTasks().equals(((ListOfTasks) that).getTasks()) &&
                 getTaskCreator().equals(((ListOfTasks) that).getTaskCreator()) &&
                 getColor() == ((ListOfTasks) that).getColor() &&
                 nameOfList.equals(((ListOfTasks) that).nameOfList);
     }
 
     public int hashCode(){
-        return Arrays.hashCode(getTasks()) * getTaskCreator().hashCode() +
+        return getTasks().hashCode() * getTaskCreator().hashCode() +
                 getColor().hashCode() * getNameOfList().hashCode();
     }
 }

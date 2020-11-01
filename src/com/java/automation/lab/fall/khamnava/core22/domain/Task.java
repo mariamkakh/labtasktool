@@ -5,6 +5,8 @@ import com.java.automation.lab.fall.khamnava.core22.enums.StatusOfTask;
 import com.java.automation.lab.fall.khamnava.core22.enums.TypeOfTask;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Task {
     private String nameTask;
@@ -13,20 +15,21 @@ public class Task {
     private TypeOfTask type;
     private String tagsList;
     private AbstractUser taskCreator;
-    private SubTask[] subTasks;
+    private LinkedList<SubTask> subTasks;
     private OffsetDateTime dateOfCreation;
     private OffsetDateTime deadline;
     private AbstractAttachment attachFiles;
     private int countOfStoryPoints;
-    private Milestone[] milestones;
+    private List<Milestone> milestones;
     private UrlAdress pathToOtherService;
-    private Comment[] comments;
+    private List<Comment> comments;
     private AbstractUser assignee;
 
     public Task(String nameTask, PriorityOfTask priority, StatusOfTask status, TypeOfTask type, String tagsList,
-                AbstractUser taskCreator, SubTask[] subTasks, OffsetDateTime dateOfCreation, OffsetDateTime deadline,
-                AbstractAttachment attachFiles, int countOfStoryPoints, Milestone[] milestones,
-                UrlAdress pathToOtherService, Comment[] comments, AbstractUser assignee) {
+                AbstractUser taskCreator, LinkedList<SubTask> subTasks, OffsetDateTime dateOfCreation,
+                OffsetDateTime deadline, AbstractAttachment attachFiles, int countOfStoryPoints,
+                List<Milestone> milestones, UrlAdress pathToOtherService, List<Comment> comments,
+                AbstractUser assignee) {
         this.nameTask = nameTask;
         this.priority= priority;
         this.status = status;
@@ -67,9 +70,9 @@ public class Task {
 
     public void setTaskCreator(AbstractUser taskCreator) { this.taskCreator = taskCreator; }
 
-    public SubTask[] getSubTasks() { return this.subTasks; }
+    public LinkedList<SubTask> getSubTasks() { return this.subTasks; }
 
-    public void setSubTasks(SubTask[] subTasks) { this.subTasks = subTasks; }
+    public void setSubTasks(LinkedList<SubTask> subTasks) { this.subTasks = subTasks; }
 
     public OffsetDateTime getDateOfCreation() { return this.dateOfCreation; }
 
@@ -87,17 +90,21 @@ public class Task {
 
     public void setCountOfStoryPoints(int countOfStoryPoints) { this.countOfStoryPoints = countOfStoryPoints; }
 
-    public Milestone[] getMilestones() { return this.milestones; }
+    public List<Milestone> getMilestones() { return this.milestones; }
 
-    public void setMilestones(Milestone[] milestones) { this.milestones = milestones; }
+    public void setMilestones(List<Milestone> milestones) { this.milestones = milestones; }
 
     public UrlAdress getPathToOtherService() { return this.pathToOtherService; }
 
     public void setPathToOtherService(UrlAdress pathToOtherService) { this.pathToOtherService = pathToOtherService; }
 
-    public Comment[] getComments() { return this.comments; }
+    public List<Comment> getComments() { return this.comments; }
 
-    public void setComments(Comment[] comments) { this.comments = comments; }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
 
     public AbstractUser getAssignee() { return this.assignee; }
 
@@ -105,19 +112,36 @@ public class Task {
 
     @Override
     public String toString() {
+        String res1 = "[ ";
+        for(SubTask st : subTasks) {
+            res1 += (st.toString() + ",\n");
+        }
+        res1 += "]";
+
+        String res2 = "[ ";
+        for(Milestone mile : milestones) {
+            res2 += (mile.toString() + ",\n");
+        }
+        res2 += "]";
+
+        String res3 = "[ ";
+        for(Comment com : comments) {
+            res3 += (com.toString() + ",\n");
+        }
+        res3 += "]";
         return "Sprint {\n\tnameTask: " + nameTask +
                 "\n\tpriority: " + priority.toString() +
                 "\n\ttype: " + type.toString() +
                 "\n\ttagsList: " + tagsList +
                 "\n\ttaskCreator: " + taskCreator.toString() +
-                "\n\tsubTasks: " + Arrays.toString(subTasks) +
+                "\n\tsubTasks: " + res1 +
                 "\n\tdateOfCreation: " + dateOfCreation.toString() +
                 "\n\tdeadline: " + deadline.toString() +
                 "\n\tattachFiles: " + attachFiles.toString() +
                 "\n\tcountOfStoryPoints: " + countOfStoryPoints +
-                "\n\tmilestones: " + Arrays.toString(milestones) +
+                "\n\tmilestones: " + res2 +
                 "\n\tpathToOtherService: " + pathToOtherService.toString() +
-                "\n\tcomments: " + Arrays.toString(comments) +
+                "\n\tcomments: " + res3 +
                 "\n\tassignee: " + assignee.toString() +
                 "\n}";
     }
@@ -139,22 +163,22 @@ public class Task {
                 getType().equals(((Task) that).getType()) &&
                 tagsList.equals(((Task) that).tagsList) &&
                 getTaskCreator().equals(((Task) that).getTaskCreator()) &&
-                Arrays.equals(getSubTasks(), ((Task) that).getSubTasks()) &&
+                getSubTasks().equals(((Task) that).getSubTasks()) &&
                 getDateOfCreation().equals(((Task) that).getDateOfCreation()) &&
                 getDeadline().equals(((Task) that).getDeadline()) &&
                 getAttachFiles().equals(((Task) that).getAttachFiles()) &&
                 countOfStoryPoints == ((Task) that).countOfStoryPoints &&
-                Arrays.equals(getMilestones(), ((Task) that).getMilestones()) &&
+                getMilestones().equals(((Task) that).getMilestones()) &&
                 getPathToOtherService().equals(((Task) that).getPathToOtherService()) &&
-                Arrays.equals(getComments(), ((Task) that).getComments()) &&
+                getComments().equals(((Task) that).getComments()) &&
                 getAssignee().equals(((Task) that).getAssignee());
     }
 
     public int hashCode(){
         return (getNameTask().hashCode() + getPriority().hashCode() - getStatus().hashCode()) *
-                (tagsList.hashCode() + getTaskCreator().hashCode() - Arrays.hashCode(getSubTasks())) -
+                (tagsList.hashCode() + getTaskCreator().hashCode() - getSubTasks().hashCode()) -
                 (getDateOfCreation().hashCode() + getDeadline().hashCode() * getAttachFiles().hashCode()) *
-                countOfStoryPoints - (Arrays.hashCode(getMilestones()) + getPathToOtherService().hashCode() -
-                Arrays.hashCode(getComments()) * getAssignee().hashCode());
+                countOfStoryPoints - (getMilestones().hashCode() + getPathToOtherService().hashCode() -
+                getComments().hashCode() * getAssignee().hashCode());
     }
 }

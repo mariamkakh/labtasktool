@@ -1,12 +1,13 @@
 package com.java.automation.lab.fall.khamnava.core22.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Activity {
     private VisualBoard everyAction;
-    private Action[] listOfActions;
+    private List<Action> listOfActions;
 
-    public Activity(VisualBoard everyAction, Action[] listOfActions) {
+    public Activity(VisualBoard everyAction, List<Action> listOfActions) {
         this.everyAction = everyAction;
         this.listOfActions = listOfActions;
     }
@@ -15,14 +16,19 @@ public class Activity {
 
     public void setEveryAction(VisualBoard everyAction) { this.everyAction = everyAction; }
 
-    public Action[] getListOfActions() { return this.listOfActions; }
+    public List<Action> getListOfActions() { return this.listOfActions; }
 
-    public void setListOfActions(Action[] listOfActions) { this.listOfActions = listOfActions; }
+    public void setListOfActions(List<Action> listOfActions) { this.listOfActions = listOfActions; }
 
     @Override
     public String toString() {
+        String res = "[ ";
+        for(Action ac : listOfActions) {
+            res += (ac.toString() + ",\n");
+        }
+        res += "]";
         return "Sprint {\n\teveryAction: " + everyAction.toString() +
-                "\n\tlistOfActions: " + Arrays.toString(listOfActions) +
+                "\n\tlistOfActions: " + res +
                 "\n}";
     }
 
@@ -38,7 +44,7 @@ public class Activity {
             return true;
         }
         return getEveryAction().equals(((Activity) that).getEveryAction()) &&
-                Arrays.equals(getListOfActions(), ((Activity) that).getListOfActions());
+                getListOfActions().equals(((Activity) that).getListOfActions());
     }
 
     public int hashCode(){

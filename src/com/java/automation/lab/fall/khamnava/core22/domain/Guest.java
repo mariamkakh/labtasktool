@@ -6,11 +6,15 @@ import com.java.automation.lab.fall.khamnava.core22.enums.UserRole;
 import com.java.automation.lab.fall.khamnava.core22.exception.ForbiddenActionException;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 public class Guest extends AbstractUser{
-    private UserAction[] action = {UserAction.WATCH_TASK, UserAction.WATCH_SPRINT};
+    private HashSet<UserAction> action = new HashSet<UserAction>(Arrays.asList(
+            UserAction.WATCH_TASK, UserAction.WATCH_SPRINT));
 
-    public Guest(Info significantInfo, UserRole role, VisualBoard[] visualBoard) {
+    public Guest(Info significantInfo, UserRole role, List<VisualBoard> visualBoard) {
         super(significantInfo, role, visualBoard);
     }
 
@@ -37,18 +41,25 @@ public class Guest extends AbstractUser{
     public void writeInfo() {
         System.out.print(this.getSignificantInfo().getName() + " " + this.getSignificantInfo().getFirstName() +
                 " " + this.getRole() + " ");
-        for (int i = 0; i < action.length; i++) {
-            System.out.print(this.action[i] + " ");
+        Iterator<UserAction> i = action.iterator();
+        while (i.hasNext()) {
+            System.out.print(i.next().toString() + " ");
         }
         System.out.println();
     }
 
     @Override
     public String toString() {
+        String res = "[ ";
+        Iterator<UserAction> i = action.iterator();
+        while (i.hasNext()) {
+            res += (i.next().toString() + " ");
+        }
+        res += "]";
         return "Sprint {\n\tsignificantInfo: " + getSignificantInfo().toString() +
                 "\n\trole: " + getRole().toString() +
                 "\n\tvisualBoard: " + getVisualBoard().toString() +
-                "\n\taction: " + Arrays.toString(action) +
+                "\n\taction: " + res +
                 "\n}";
     }
 
@@ -66,11 +77,11 @@ public class Guest extends AbstractUser{
         return getSignificantInfo().equals(((Guest) that).getSignificantInfo()) &&
                 getRole().equals(((Guest) that).getRole()) &&
                 getVisualBoard().equals(((Guest) that).getVisualBoard()) &&
-                Arrays.equals(action, ((Guest) that).action);
+                this.action.equals(((Guest) that).action);
     }
 
     public int hashCode(){
         return getSignificantInfo().hashCode() + getRole().hashCode() -
-                getVisualBoard().hashCode() + Arrays.hashCode(action);
+                getVisualBoard().hashCode() + this.action.hashCode();
     }
 }
